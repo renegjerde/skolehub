@@ -59,10 +59,10 @@ SkoleHub/
 
 ## Versjon
 
-SkoleHub 1.1.0 · Live timevær for Paradis, Bergen.
+SkoleHub 1.1.1 · Live timevær for Paradis, Bergen.
 
 
-## Versjon 1.1.0
+## Versjon 1.1.1
 - KaffeStatus oppdaterer statusvisningen umiddelbart ved knappetrykk, før lagring, lyd og haptikk.
 - Lagt til synkronisering mellom åpne faner i samme nettleser på samme enhet.
 - Merk: Synkronisering mellom forskjellige ansatte/enheter krever en felles backend/databaseløsning.
@@ -94,3 +94,10 @@ Fritekstnotatet er fjernet fra KaffeStatus for å unngå at ansatte utilsiktet l
 
 Supabase Free koster 0 USD innenfor kvotene, men prosjekter med for lite databaseaktivitet kan settes på pause etter omtrent sju dager. Gratisnivået har også begrensninger på lagring, trafikk og Realtime-kapasitet, og inkluderer ikke automatiske databasebackuper. Se [Supabase-priser](https://supabase.com/pricing) og [dokumentasjonen om automatisk pause](https://supabase.com/docs/guides/platform/free-project-pausing) før løsningen tas i bruk som kritisk infrastruktur.
 
+
+
+## Versjon 1.1.1 – Supabase-konfigurasjon
+- KaffeStatus er forhåndskonfigurert med prosjektets Project URL og Publishable Key.
+- Ikke legg Supabase Secret Key eller service_role-nøkkel i GitHub.
+- Kontroller at SQL-oppsettet i `apps/kaffestatus/supabase-schema.sql` er kjørt i det samme Supabase-prosjektet.
+- Etter publisering skal KaffeStatus vise «Tilkoblet felles kaffetavle». Test med to separate enheter.

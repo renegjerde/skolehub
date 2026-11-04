@@ -13,6 +13,12 @@ button,a{font:inherit;-webkit-tap-highlight-color:transparent}button{cursor:poin
 .weather-widget{border:0;cursor:pointer;transform:rotate(5deg);font-family:inherit;gap:0;grid-template-rows:1fr auto auto;padding:9px 5px 8px;transition:transform .2s ease,box-shadow .2s ease}
 .weather-widget:hover{transform:rotate(0) translateY(-2px);box-shadow:0 16px 30px rgba(171,133,66,.18)}
 .weather-icon{font-size:37px;line-height:1}
+/* Nattikon: månen ligger bak skyen, med tydelig overlapp. */
+.weather-icon{display:grid;place-items:center}
+.night-weather-icon{position:relative;display:block;width:1.5em;height:1.22em;line-height:1}
+.night-moon,.night-cloud{position:absolute;display:block;line-height:1;font-size:1em}
+.night-moon{left:0;top:-.04em;z-index:1}
+.night-cloud{right:-.12em;bottom:-.04em;z-index:2;filter:drop-shadow(0 1px 1px rgba(44,26,29,.12))}
 .weather-temp{font-size:17px;line-height:1.1;color:#59483D;margin-top:3px}
 .weather-label{font-size:9px;font-weight:800;color:#92784F;line-height:1.1;margin-top:2px}
 .weather-widget.is-rain{background:linear-gradient(145deg,#DCEAF3,#F2F7FA);box-shadow:0 12px 28px rgba(89,125,151,.12)}

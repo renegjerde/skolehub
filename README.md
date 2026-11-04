@@ -113,3 +113,8 @@ Supabase Free koster 0 USD innenfor kvotene, men prosjekter med for lite databas
 - Værikonet bruker lokal soloppgang og solnedgang for Paradis i tidssonen Europe/Oslo.
 - Måne- og måneskyikon vises etter lokal solnedgang.
 - Cache-busting på app.js sikrer at nettleseren henter den oppdaterte værlogikken.
+
+
+## Versjon 1.1.4
+- Nattikonet for delvis skyet og overskyet vær viser nå månen bak skyen med overlappende lag, i stedet for to emojier ved siden av hverandre.
+- Oppdatert cache-versjon for CSS og JavaScript slik at nettleseren henter de nye ikonstilene.

@@ -251,16 +251,20 @@ else goHome();
         }).format(now));
         isNight = hourInBergen < 7 || hourInBergen >= 19;
       }
-      const nightSymbols = { 0: '🌙', 1: '🌙☁️', 2: '🌙☁️', 3: '🌙☁️' };
-      const symbol = isNight && Object.prototype.hasOwnProperty.call(nightSymbols, code)
-        ? nightSymbols[code]
-        : daySymbol;
+      // Nattikonet bygges i to lag: månen først, skyen oppå den.
+      // Separate span-elementer gjør at de overlapper i stedet for å stå ved siden av hverandre.
+      const nightCloudMarkup = '<span class="night-weather-icon"><span class="night-moon">🌙</span><span class="night-cloud">☁️</span></span>';
+      const hasNightCloud = isNight && [1, 2, 3].includes(Number(code));
+      const showNightMoon = isNight && Number(code) === 0;
+      const symbol = hasNightCloud ? nightCloudMarkup : (showNightMoon ? '🌙' : daySymbol);
       const temperature = Math.round(data.hourly.temperature_2m[index]);
       const rain = data.hourly.precipitation_probability?.[index];
       const wind = data.hourly.wind_speed_10m?.[index];
       const timeLabel = times[index].slice(11, 16);
       const nextTime = times[index + 1]?.slice(11, 16) || '–';
-      iconEl.textContent = symbol; tempEl.textContent = `${temperature}°`; labelEl.textContent = 'Paradis';
+      if (hasNightCloud) iconEl.innerHTML = symbol;
+      else iconEl.textContent = symbol;
+      tempEl.textContent = `${temperature}°`; labelEl.textContent = 'Paradis';
       widget.classList.remove('is-rain', 'is-cloud', 'is-snow', 'is-night');
       if (tone !== 'sun') widget.classList.add(`is-${tone}`);
       if (isNight) widget.classList.add('is-night');

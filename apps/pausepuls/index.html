@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#4f46e5">
-<title>PausePuls – pauseaktiviteter for lærere</title>
+<title>PausePuls – 100 pauseaktiviteter for lærere</title>
 <style>
 :root{--ink:#172033;--muted:#667085;--line:#e5e7eb;--primary:#4f46e5;--bg:#f7f8fc;--white:#fff}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #a5b4fc;outline-offset:2px}
 .wrap{max-width:1120px;margin:auto;padding:24px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:28px}.brand{display:flex;gap:12px;align-items:center}.logo{display:grid;place-items:center;background:var(--primary);color:white;border-radius:15px;width:48px;height:48px;font-size:25px}.brand h1{margin:0;font-size:23px;letter-spacing:-.6px}.sub{color:var(--muted);font-size:14px}.btn{border:1px solid #d0d5dd;background:white;color:var(--ink);padding:10px 15px;border-radius:12px;font-weight:650}.btn.primary{background:var(--primary);border-color:var(--primary);color:white}.btn:hover{filter:brightness(.97)}.hero h2{font-size:clamp(26px,4vw,36px);letter-spacing:-1px;margin:0}.hero p{margin:5px 0 22px;color:var(--muted)}
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}.tile{border:2px solid transparent;border-radius:15px;padding:14px;text-align:left;font-weight:700;min-height:94px}.tile span{display:block;font-size:25px;margin-bottom:5px}.tile[data-cat="Bevegelse"]{background:#e0f2fe;color:#075985}.tile[data-cat="Hjernetrim"]{background:#fce7f3;color:#9d174d}.tile[data-cat="Samarbeid"]{background:#d1fae5;color:#065f46}.tile[data-cat="Ro"]{background:#ede9fe;color:#5b21b6}.tile.active{border-color:var(--primary);box-shadow:0 0 0 2px #c7d2fe}
-.filters{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;background:white;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:15px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}.field select,.field input{width:100%;border:1px solid #d0d5dd;border-radius:10px;padding:10px;background:white;color:var(--ink)}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px}.tile{border:2px solid transparent;border-radius:15px;padding:14px;text-align:left;font-weight:700;min-height:94px}.tile span{display:block;font-size:25px;margin-bottom:5px}.tile[data-cat="Bevegelse"]{background:#e0f2fe;color:#075985}.tile[data-cat="Hjernetrim"]{background:#fce7f3;color:#9d174d}.tile[data-cat="Samarbeid"]{background:#d1fae5;color:#065f46}.tile[data-cat="Ro"]{background:#ede9fe;color:#5b21b6}.tile[data-cat="Kreativitet"]{background:#ffedd5;color:#9a3412}.tile.active{border-color:var(--primary);box-shadow:0 0 0 2px #c7d2fe}
+.filters{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;background:white;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:15px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}.field select,.field input{width:100%;border:1px solid #d0d5dd;border-radius:10px;padding:10px;background:white;color:var(--ink)}
 .random{width:100%;margin:0 0 25px;padding:13px;border:0;border-radius:12px;background:var(--primary);color:white;font-weight:750}.heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.heading h3{margin:0;font-size:20px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:16px;text-align:left;transition:.15s}.card:hover{border-color:#a5b4fc;transform:translateY(-1px)}.cardtop{display:flex;justify-content:space-between;gap:8px;align-items:center}.chip{display:inline-block;border-radius:99px;background:#eef2ff;color:#4338ca;padding:4px 9px;font-size:12px;font-weight:750}.star{border:0;background:transparent;color:#d97706;font-size:23px;padding:0 4px}.card h4{margin:10px 0 4px;font-size:17px}.empty{padding:35px;text-align:center;color:var(--muted);display:none}.panel{margin-top:22px;background:#eef2ff;border:1px solid #e0e7ff;border-radius:16px;padding:17px}.panel h3{margin:0 0 4px}.panel p{margin:0 0 12px;color:#4338ca;font-size:14px}.panel .row{display:flex;gap:8px;flex-wrap:wrap}.detail{display:none;background:white;border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,36px)}.back{margin-bottom:16px}.detail h2{font-size:clamp(27px,4vw,38px);line-height:1.15;margin:12px 0}.meta{color:var(--muted);font-size:14px;margin-bottom:23px}.instructions{background:#eef2ff;border-radius:16px;padding:18px;margin-bottom:18px}.instructions h3{margin:0 0 8px;font-size:16px}.instructions p{margin:0;line-height:1.7}.timerlabel{text-align:center;color:var(--muted);font-size:13px;font-weight:700}.timer{font-size:clamp(54px,10vw,82px);font-weight:800;letter-spacing:-4px;text-align:center;font-variant-numeric:tabular-nums;margin:0}.bar{height:6px;border-radius:99px;background:#e5e7eb;overflow:hidden;margin:0 auto 20px;max-width:440px}.bar div{height:100%;background:#6366f1;width:100%;transition:width .3s}.controls{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}.done{display:none;text-align:center;background:#d1fae5;color:#065f46;border-radius:12px;padding:12px;margin-top:18px;font-weight:700}.ai{display:none;margin-top:18px;background:white;border:1px solid var(--line);border-radius:16px;padding:18px}.ai textarea{width:100%;border:1px solid #d0d5dd;border-radius:10px;padding:10px;min-height:75px}.ai p{color:var(--muted);font-size:14px}.generated{white-space:pre-wrap;background:#f8fafc;border-radius:12px;padding:14px;margin-top:12px;display:none}.foot{color:var(--muted);font-size:12px;text-align:center;margin:25px 0 5px}
 @media(max-width:760px){.wrap{padding:15px}.tiles{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.cards{grid-template-columns:1fr}.filters{grid-template-columns:1fr 1fr}.top{align-items:flex-start}.brand h1{font-size:20px}}
@@ -31,11 +31,14 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-vis
   <button class="tile" data-cat="Hjernetrim"><span>🧠</span>Hjernetrim</button>
   <button class="tile" data-cat="Samarbeid"><span>🤝</span>Samarbeid</button>
   <button class="tile" data-cat="Ro"><span>🌿</span>Finn roen</button>
+  <button class="tile" data-cat="Kreativitet"><span>🎨</span>Kreativitet</button>
  </div>
  <div class="filters">
   <div class="field"><label for="grade">Klassetrinn</label><select id="grade"><option value="all">Alle trinn</option><option value="1-4">1.–4. trinn</option><option value="5-7">5.–7. trinn</option></select></div>
   <div class="field"><label for="duration">Varighet</label><select id="duration"><option value="all">Alle varigheter</option><option value="short">1–2 minutter</option><option value="medium">3–5 minutter</option><option value="long">6–10 minutter</option></select></div>
-  <div class="field"><label for="kind">Aktivitetstype</label><select id="kind"><option value="all">Alle typer</option><option>Bevegelse</option><option>Hjernetrim</option><option>Samarbeid</option><option>Ro</option></select></div>
+  <div class="field"><label for="kind">Aktivitetstype</label><select id="kind"><option value="all">Alle typer</option><option>Bevegelse</option><option>Hjernetrim</option><option>Samarbeid</option><option>Ro</option><option>Kreativitet</option></select></div>
+  <div class="field"><label for="equipment">Utstyr</label><select id="equipment"><option value="all">Alt utstyr</option><option value="none">Uten utstyr</option><option value="some">Krever litt utstyr</option></select></div>
+  <div class="field"><label for="setup">Plass i rommet</label><select id="setup"><option value="all">Alle oppsett</option><option>Ved pulten</option><option>Litt plass</option><option>Hele rommet</option></select></div>
   <div class="field"><label for="search">Søk</label><input id="search" placeholder="Søk etter aktivitet…"></div>
  </div>
  <button class="random" id="random">⤨ Trekk en tilfeldig aktivitet</button>
@@ -54,10 +57,10 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-vis
  <div class="done" id="done">🎉 Bra jobbet! Pausen er ferdig.</div>
 </section>
 </main>
-<div class="foot">PausePuls · Første versjon · Aktivitetene kan tilpasses klassen og rommet.</div>
+<div class="foot">PausePuls · Første versjon · 100 aktiviteter for 1.–7. trinn · Tilpass alltid etter gruppen og rommet.</div>
 </div>
 <script>
-const activities=[
+const baseActivities=[
 [1,"Frys som en statue","Bevegelse",3,"1-4","Sett på litt musikk eller klapp en rytme. Elevene beveger seg fritt på plassen sin. Når musikken stopper eller læreren sier «frys», står alle helt stille som en statue. Varier med morsomme positurer!"],
 [2,"Speilbildet","Bevegelse",3,"1-7","Elevene jobber i par. Én er leder og gjør langsomme bevegelser med armer, hode og kropp. Den andre er speil og følger så nøyaktig som mulig. Bytt etter ett minutt."],
 [3,"Kryss og klapp","Bevegelse",2,"1-4","Stå ved pulten. Klapp høyre hånd mot venstre kne og venstre hånd mot høyre kne. Øk tempoet gradvis. Avslutt med ti rolige tåhev eller hopp på stedet."],
@@ -88,21 +91,725 @@ const activities=[
 [28,"Lytt til rommet","Ro",2,"1-7","Sitt stille og lytt. Hvilke lyder kan du høre nær deg? Hvilke lyder er langt borte? Etter et halvt minutt kan elevene dele én lyd de la merke til."],
 [29,"Fingermassasje","Ro",3,"1-7","Bruk den ene hånden til å stryke forsiktig over fingrene på den andre. Bytt hånd. Beveg håndleddene rolig og la hendene hvile i fanget."],
 [30,"Rolig tallpust","Ro",3,"5-7","Pust inn mens du teller rolig til tre, og pust ut mens du teller til fire. Gjenta i ditt eget tempo. Hvis det føles ubehagelig, pust helt vanlig."]
-].map(a=>({id:a[0],title:a[1],cat:a[2],mins:a[3],grade:a[4],instructions:a[5]}));
+ ].map(a=>({id:a[0],title:a[1],cat:a[2],mins:a[3],grade:a[4],instructions:a[5],gear:'Ingen',setup:({1:'Litt plass',2:'Litt plass',4:'Litt plass',17:'Litt plass',19:'Hele rommet',20:'Litt plass'}[a[0]]||'Ved pulten')}));
+
+const extraActivities = [
+  {
+    "id": 31,
+    "title": "Robot og fjernkontroll",
+    "cat": "Bevegelse",
+    "mins": 3,
+    "grade": "1-4",
+    "instructions": "Elevene er roboter som bare kan bevege seg når læreren gir en kommando: «start», «sakte», «sving», «frys» eller «retur». Hold bevegelsene små ved pulten.",
+    "gear": "Ingen",
+    "setup": "Litt plass"
+  },
+  {
+    "id": 32,
+    "title": "Tallhopp",
+    "cat": "Bevegelse",
+    "mins": 3,
+    "grade": "1-4",
+    "instructions": "Si et tall mellom 1 og 10. Elevene gjør like mange små tåhev, knebøy eller armstrekk. Velg én bevegelse om gangen, og la elevene gjøre den sittende dersom det passer bedre.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 33,
+    "title": "Kroppens alfabet",
+    "cat": "Bevegelse",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Læreren sier en bokstav. Elevene former bokstaven med armer og overkropp alene eller sammen med en partner. Velg bokstaver som er enkle å lage, og la fantasien avgjøre.",
+    "gear": "Ingen",
+    "setup": "Litt plass"
+  },
+  {
+    "id": 34,
+    "title": "Fire hjørner – rolig",
+    "cat": "Bevegelse",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Gi fire alternativer, for eksempel årstider eller favorittmat. Elevene viser valget med fingre eller går rolig til et hjørne. Ingen løping; aktiviteten kan også gjøres ved pulten med fire håndsignaler.",
+    "gear": "Ingen",
+    "setup": "Hele rommet"
+  },
+  {
+    "id": 35,
+    "title": "Følg klappet",
+    "cat": "Bevegelse",
+    "mins": 2,
+    "grade": "1-7",
+    "instructions": "Læreren klapper én gang, to ganger eller tre ganger. Elevene svarer med en avtalt bevegelse: én gang = strekk armene, to = rull skuldrene, tre = stå på tå. Bytt mønster underveis.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 36,
+    "title": "Kryss kroppen",
+    "cat": "Bevegelse",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Berør høyre hånd mot venstre skulder, venstre hånd mot høyre kne og motsatt. Gjenta sakte og prøv å finne en jevn rytme. Gjør bevegelsene mindre eller sittende ved behov.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 37,
+    "title": "Værmelding med kroppen",
+    "cat": "Bevegelse",
+    "mins": 3,
+    "grade": "1-4",
+    "instructions": "Læreren beskriver været: sol betyr strekk, regn betyr fingertromming på pulten, vind betyr svai rolig fra side til side, og torden betyr et forsiktig tramp. Sett sammen en liten værmelding.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 38,
+    "title": "Usynlig hinderløype",
+    "cat": "Bevegelse",
+    "mins": 4,
+    "grade": "1-4",
+    "instructions": "Elevene går på stedet og later som de går over en liten bekk, dukker under en grein og trår forsiktig over steiner. Bruk fantasien, men hold alle bevegelser på egen plass.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 39,
+    "title": "Bevegelsesbingo",
+    "cat": "Bevegelse",
+    "mins": 5,
+    "grade": "1-7",
+    "instructions": "Læreren nevner bevegelser: strekk, tåhev, skulderrull, rolig marsj og balanse. Elevene velger fem og prøver å gjennomføre dem i valgfri rekkefølge. Gjenta med nye bevegelser.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 40,
+    "title": "Frys i følelsen",
+    "cat": "Bevegelse",
+    "mins": 3,
+    "grade": "1-4",
+    "instructions": "Læreren sier en stemning eller rolle, som overrasket, stolt, nysgjerrig eller søvnig. Elevene lager en stillestående positur som viser følelsen. Minn om at alle uttrykk kan se forskjellige ut.",
+    "gear": "Ingen",
+    "setup": "Litt plass"
+  },
+  {
+    "id": 41,
+    "title": "Speil i sirkel",
+    "cat": "Bevegelse",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Stå eller sitt i en sirkel. En elev gjør en langsom bevegelse, og resten speiler. La bevegelsen vandre videre fra elev til elev uten å snakke. Velg bevegelser som ikke krever at noen flytter seg langt.",
+    "gear": "Ingen",
+    "setup": "Litt plass"
+  },
+  {
+    "id": 42,
+    "title": "Kroppslig ekko",
+    "cat": "Bevegelse",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Læreren lager en kort sekvens med tre bevegelser, for eksempel klapp, strekk og knebøy. Klassen gjentar i samme rekkefølge. Legg til én bevegelse om gangen.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 43,
+    "title": "Tempo på stedet",
+    "cat": "Bevegelse",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Gå på stedet mens læreren varierer tempoet: sakte, middels, raskt og stopp. Bytt mellom å gå, løfte knærne lavt og bevege armene. Ingen skal konkurrere om fart.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 44,
+    "title": "Strekk som et tre",
+    "cat": "Bevegelse",
+    "mins": 2,
+    "grade": "1-4",
+    "instructions": "Start som et lite frø med kroppen samlet. Voks sakte opp til et høyt tre, la greinene svaie i vinden og bli til slutt et lite frø igjen. Gjenta én gang.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 45,
+    "title": "Tre ting på fem sekunder",
+    "cat": "Hjernetrim",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Velg en kategori, for eksempel ting i en skolesekk, dyr eller frukt. Elevene får fem sekunder til å nevne tre ting. La dem tenke alene først, og del deretter med en partner.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 46,
+    "title": "Hvilket ord passer ikke?",
+    "cat": "Hjernetrim",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Si fire ord der ett skiller seg ut, for eksempel eple, pære, gulrot og banan. Elevene forklarer hvilket ord de valgte og hvorfor. Flere svar kan være riktige dersom begrunnelsen er god.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 47,
+    "title": "Huskerekkefølgen",
+    "cat": "Hjernetrim",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Si en rekke på tre ord eller bevegelser. Klassen gjentar dem i samme rekkefølge. Legg til ett element hver runde. Stopp når det blir vanskelig, og prøv å slå klassens egen rekord.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 48,
+    "title": "Hva ville du valgt?",
+    "cat": "Hjernetrim",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Gi to morsomme alternativer: kunne fly eller puste under vann, bo i trehytte eller på båt. Elevene velger ved å vise én eller to fingre og gir en kort begrunnelse til sidemannen.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 49,
+    "title": "Lydgåten",
+    "cat": "Hjernetrim",
+    "mins": 3,
+    "grade": "1-4",
+    "instructions": "Lag en enkel lyd bak en bok eller med et vanlig klasseromsobjekt, for eksempel rasling med papir eller et lett dunk på pulten. Elevene gjetter lydkilden og forklarer hva de hørte.",
+    "gear": "Enkelt utstyr",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 50,
+    "title": "Bokstavjakt",
+    "cat": "Hjernetrim",
+    "mins": 3,
+    "grade": "1-4",
+    "instructions": "Velg en bokstav. Elevene finner stille tre ting i rommet som begynner på bokstaven, eller tre ord de kan komme på. Del noen forslag høyt.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 51,
+    "title": "Regn ut med kroppen",
+    "cat": "Hjernetrim",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Si et regnestykke. Elevene viser svaret med fingrene, eller med en avtalt bevegelse: partall = armene opp, oddetall = hendene på skuldrene. Tilpass tallene til trinnet.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 52,
+    "title": "Forbudt ord",
+    "cat": "Hjernetrim",
+    "mins": 4,
+    "grade": "5-7",
+    "instructions": "Velg et enkelt tema og et vanlig ord som ikke får brukes, for eksempel «ja» eller «nei». En elev forklarer et begrep for en partner uten å si det forbudte ordet. Bytt etter ett minutt.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 53,
+    "title": "Mini-mysteriet",
+    "cat": "Hjernetrim",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Gi tre ledetråder til en gjenstand, et dyr eller et sted. Begynn med en vanskelig ledetråd og gjør dem gradvis enklere. Elevene kan skrive eller hviske et forslag til partneren før svaret avsløres.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 54,
+    "title": "Tenk motsatt",
+    "cat": "Hjernetrim",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Si ord som varm, tung, høy eller tidlig. Elevene svarer med en motsetning. Utvid med setninger eller følelser for eldre elever. Prøv å holde en jevn rytme uten å stresse.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 55,
+    "title": "Hvilket tall mangler?",
+    "cat": "Hjernetrim",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Skriv eller si en tallrekke med et tomrom, for eksempel 2, 4, __, 8. Elevene finner tallet og forklarer mønsteret. Lag enklere eller vanskeligere rekker etter nivå.",
+    "gear": "Tavle",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 56,
+    "title": "Beskriv uten å si",
+    "cat": "Hjernetrim",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "En elev velger et kjent objekt eller dyr og beskriver det uten å si navnet. De andre gjetter. Oppmuntre til å beskrive form, funksjon, farge eller hvor det finnes.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 57,
+    "title": "Rim på rundgang",
+    "cat": "Hjernetrim",
+    "mins": 3,
+    "grade": "1-4",
+    "instructions": "Velg et enkelt ord, for eksempel «mus». Klassen finner rimord etter tur. Godta tulleord, og prøv deretter å lage en kort setning med to av rimordene.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 58,
+    "title": "Tre hint og ett svar",
+    "cat": "Hjernetrim",
+    "mins": 4,
+    "grade": "5-7",
+    "instructions": "Elevene tenker på et fagbegrep, en historisk person eller et dyr. De lager tre hint fra vanskelig til lett. Partneren prøver å gjette etter hvert hint.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 59,
+    "title": "Felles pulsord",
+    "cat": "Samarbeid",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Velg et ord med flere stavelser. Klassen sier ordet sammen og klapper stavelsene. Prøv å si det høyt, lavt, sakte og rytmisk – men alltid samlet.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 60,
+    "title": "Usynlig tråd",
+    "cat": "Samarbeid",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Lat som dere holder i samme usynlige tråd. En elev starter med en rolig bevegelse, og gruppen følger slik at tråden aldri blir «slakk». Bytt leder uten å snakke.",
+    "gear": "Ingen",
+    "setup": "Litt plass"
+  },
+  {
+    "id": 61,
+    "title": "Klasseorkester",
+    "cat": "Samarbeid",
+    "mins": 5,
+    "grade": "1-7",
+    "instructions": "Del klassen i tre lydgrupper: klapp, lett fingertromming og gni hendene. Dirigenten peker på gruppene for å starte og stoppe dem. Bytt dirigent og lag en felles avslutning.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 62,
+    "title": "Bygg en setning sammen",
+    "cat": "Samarbeid",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Første elev sier ett ord. Neste legger til ett ord slik at klassen sammen bygger en grammatisk eller morsom setning. Prøv å avslutte med punktum før setningen blir for lang.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 63,
+    "title": "Felles tegnebeskrivelse",
+    "cat": "Samarbeid",
+    "mins": 5,
+    "grade": "1-7",
+    "instructions": "Én elev beskriver en enkel figur uten å vise den. Partneren tegner etter instruksjonene. Sammenlign til slutt og snakk om hvilke beskrivelser som var tydelige.",
+    "gear": "Papir og blyant",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 64,
+    "title": "Mønsterstafett uten løping",
+    "cat": "Samarbeid",
+    "mins": 4,
+    "grade": "1-4",
+    "instructions": "Lag et mønster med klapp, kneklapp og knips. Første elev viser mønsteret til neste, som gjentar det. Se om mønsteret kommer helt rundt uten å endre rekkefølge.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 65,
+    "title": "Finn tre felles ting",
+    "cat": "Samarbeid",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Elever i par finner tre ting de har til felles, som begge liker, kan eller har opplevd. Unngå personlige eller private spørsmål. Del én ufarlig ting med klassen.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 66,
+    "title": "Lydløs rekkefølge",
+    "cat": "Samarbeid",
+    "mins": 6,
+    "grade": "5-7",
+    "instructions": "Klassen skal stille seg i rekkefølge etter fødselsmåned uten å snakke. Bruk tegn og samarbeid. Ingen trenger å oppgi dato eller årstall – måned er nok. Kan også løses sittende med håndsignaler.",
+    "gear": "Ingen",
+    "setup": "Hele rommet"
+  },
+  {
+    "id": 67,
+    "title": "Felles mål på tavla",
+    "cat": "Samarbeid",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Velg en felles utfordring, som å finne ti ord på en bestemt bokstav eller ti måter å vise vennlighet på. Samle forslagene på tavla og bygg videre på hverandres ideer.",
+    "gear": "Tavle",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 68,
+    "title": "Send et kompliment",
+    "cat": "Samarbeid",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Send en positiv, konkret observasjon rundt gruppen, for eksempel «du hjalp til med å rydde». Det er også lov å sende et takk for noe klassen fikk til sammen. Ingen må dele noe personlig.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 69,
+    "title": "Felles telling med tegn",
+    "cat": "Samarbeid",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Tell fra 1 til 15, men bytt ut hvert tall som er delelig med tre med et klapp. Klassen må følge med og hjelpe hverandre med å holde mønsteret.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 70,
+    "title": "Historie med tre ord",
+    "cat": "Samarbeid",
+    "mins": 6,
+    "grade": "1-7",
+    "instructions": "Skriv tre tilfeldige ord på tavla. Klassen lager en historie der alle tre ordene må være med. Elevene foreslår én setning hver, og gruppen prøver å få en sammenhengende fortelling.",
+    "gear": "Tavle",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 71,
+    "title": "Tegn samme form",
+    "cat": "Samarbeid",
+    "mins": 4,
+    "grade": "1-4",
+    "instructions": "Læreren beskriver enkle former og plasseringer, som en stor sirkel med en liten trekant inni. Elevene tegner samtidig uten å se på hverandres ark. Sammenlign og se om instruksjonen var tydelig.",
+    "gear": "Papir og blyant",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 72,
+    "title": "Felles rytmesvar",
+    "cat": "Samarbeid",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Læreren klapper et spørsmål i en rytme. Klassen svarer med en annen avtalt rytme. Lag to eller tre spørsmål og svar, og la elevene foreslå nye rytmer.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 73,
+    "title": "Stille lagoppgave",
+    "cat": "Samarbeid",
+    "mins": 6,
+    "grade": "1-7",
+    "instructions": "Små grupper får ett mål: lag en felles statue som viser et ord, for eksempel «bro», «skog» eller «glede». Gruppen må bli enig uten å bruke stemmen. Det er greit å delta sittende.",
+    "gear": "Ingen",
+    "setup": "Litt plass"
+  },
+  {
+    "id": 74,
+    "title": "Takkekjeden",
+    "cat": "Samarbeid",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Klassen lager en kjede av små takk: «Takk for at vi …». Fokuser på noe gruppen har gjort sammen, som å lytte, prøve eller hjelpe. Det er frivillig å si noe høyt.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 75,
+    "title": "Rolig fargejakt",
+    "cat": "Ro",
+    "mins": 3,
+    "grade": "1-4",
+    "instructions": "Velg en farge. Elevene finner tre ting i rommet med den fargen og ser rolig på detaljene. Bytt farge én gang. Aktiviteten gjennomføres uten å forlate plassen.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 76,
+    "title": "Pust med hånden",
+    "cat": "Ro",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Hold én hånd foran deg. Før en finger sakte opp langs en finger mens du puster rolig inn, og ned mens du puster ut. Fortsett rundt hånden. Pust helt vanlig hvis øvelsen ikke føles behagelig.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 77,
+    "title": "Myk hånd og sterke hender",
+    "cat": "Ro",
+    "mins": 2,
+    "grade": "1-7",
+    "instructions": "Klem hendene lett sammen i to sekunder, og slipp helt opp. Gjenta tre ganger. La så armene hvile og kjenn forskjellen mellom spenning og avspenning.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 78,
+    "title": "Se etter detaljer",
+    "cat": "Ro",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Velg en gjenstand på pulten. Se stille på den i 20 sekunder og legg merke til tre detaljer du ikke hadde sett før. Del én observasjon med en partner.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 79,
+    "title": "Rolig regndråpe",
+    "cat": "Ro",
+    "mins": 3,
+    "grade": "1-4",
+    "instructions": "Start med én finger som lager en liten regndråpe mot håndflaten. Legg gradvis til flere fingre til det blir et stille regnvær, og la lyden avta igjen. Gjør det uten å slå hardt.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 80,
+    "title": "Trygg plass i tankene",
+    "cat": "Ro",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Tenk på et sted du liker, virkelig eller oppdiktet. Se for deg én farge, én lyd og én detalj derfra. Du trenger ikke lukke øynene eller dele tanken med noen.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 81,
+    "title": "Rolig horisont",
+    "cat": "Ro",
+    "mins": 2,
+    "grade": "5-7",
+    "instructions": "La blikket hvile på et punkt litt lenger unna enn skjermen eller boka. Slapp av i kjeven og senk skuldrene. Se rolig rundt i rommet før dere går tilbake til arbeidet.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 82,
+    "title": "Fingerbølge",
+    "cat": "Ro",
+    "mins": 3,
+    "grade": "1-4",
+    "instructions": "La en bølge gå fra tommelen til lillefingeren: løft én finger om gangen, og senk dem i motsatt rekkefølge. Gjenta på den andre hånden. Gjør det sakte og mykt.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 83,
+    "title": "Stille lydbilde",
+    "cat": "Ro",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Lytt i 30 sekunder og prøv å oppdage lyder uten å lete etter dem. Legg merke til én lyd nær deg og én lenger unna. Del bare det du ønsker.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 84,
+    "title": "Lag en ny superhelt",
+    "cat": "Kreativitet",
+    "mins": 6,
+    "grade": "1-7",
+    "instructions": "Finn på en superhelt med et helt hverdagslig supertalent, som å finne bortkomne blyanter eller få andre til å le. Gi helten navn, evne og et kjennetegn. Del med en partner.",
+    "gear": "Papir og blyant",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 85,
+    "title": "Oppfinn en ny ting",
+    "cat": "Kreativitet",
+    "mins": 6,
+    "grade": "1-7",
+    "instructions": "Tenk ut en oppfinnelse som løser et lite problem på skolen. Hva heter den, hvordan virker den, og hvem hjelper den? Tegn eller forklar ideen med tre setninger.",
+    "gear": "Papir og blyant",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 86,
+    "title": "Tegn uten å løfte blyanten",
+    "cat": "Kreativitet",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Velg et enkelt motiv, som et hus, en katt eller en blomst. Tegn det med én sammenhengende strek uten å løfte blyanten. Det er resultatet, ikke likheten, som er poenget.",
+    "gear": "Papir og blyant",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 87,
+    "title": "Hva kan en binders være?",
+    "cat": "Kreativitet",
+    "mins": 4,
+    "grade": "5-7",
+    "instructions": "Tenk på så mange alternative bruksområder for en binders som mulig – uten å bruke den som binders. Ta imot alle forslag først, og velg deretter den mest overraskende ideen.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 88,
+    "title": "Hvis klasserommet var …",
+    "cat": "Kreativitet",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Fullfør setningen: «Hvis klasserommet var et dyr/en planet/en restaurant, ville det …». Elevene lager en morsom sammenligning og begrunner den med én detalj.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 89,
+    "title": "Design en ny maskot",
+    "cat": "Kreativitet",
+    "mins": 6,
+    "grade": "1-7",
+    "instructions": "Finn på en maskot for klassen. Bestem navn, utseende og én egenskap som gjør den til en god klassevenn. Tegn raskt eller beskriv den for en partner.",
+    "gear": "Papir og blyant",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 90,
+    "title": "Historie fra en gjenstand",
+    "cat": "Kreativitet",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Velg en vanlig ting på pulten og forestill deg at den kan snakke. Hva ville den fortalt om dagen sin? Lag en kort replikk eller begynnelsen på en historie.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 91,
+    "title": "Tre streker blir til",
+    "cat": "Kreativitet",
+    "mins": 3,
+    "grade": "1-7",
+    "instructions": "Tegn tre tilfeldige streker eller former på arket. Gjør dem om til en figur, et dyr eller et landskap. Vis gjerne hvordan ulike elever fant ulike løsninger.",
+    "gear": "Papir og blyant",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 92,
+    "title": "Ny slutt på eventyret",
+    "cat": "Kreativitet",
+    "mins": 6,
+    "grade": "1-4",
+    "instructions": "Velg et kjent eventyr eller en historie klassen kjenner. Finn på en helt ny slutt – gjerne overraskende eller humoristisk. Fortell den muntlig til en partner.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 93,
+    "title": "Oppfinn et nytt ord",
+    "cat": "Kreativitet",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Lag et nytt ord for en følelse, en lyd eller en situasjon. Forklar hva ordet betyr og bruk det i en setning. Klassen kan stemme på dagens mest nyttige tulleord.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 94,
+    "title": "Papirfly uten flytur",
+    "cat": "Kreativitet",
+    "mins": 5,
+    "grade": "1-7",
+    "instructions": "Tegn et papirfly du kunne ha laget, men gi det et spesielt oppdrag: levere gode nyheter, besøke en planet eller finne en skatt. Tegn ruten og skriv en kort beskjed.",
+    "gear": "Papir og blyant",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 95,
+    "title": "Bytt perspektiv",
+    "cat": "Kreativitet",
+    "mins": 6,
+    "grade": "5-7",
+    "instructions": "Beskriv klasserommet fra perspektivet til en maur, en klokke eller en blyant. Hva ser den, hva er stort, og hva virker rart? Skriv tre korte setninger.",
+    "gear": "Papir og blyant",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 96,
+    "title": "Lydspor til et bilde",
+    "cat": "Kreativitet",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Se for deg et sted – en jungel, en romstasjon eller en vinterdag. Lag tre lyder med stemmen eller hendene som kunne vært lydsporet til stedet. Gruppen setter dem sammen.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 97,
+    "title": "En ting på tre måter",
+    "cat": "Kreativitet",
+    "mins": 4,
+    "grade": "1-7",
+    "instructions": "Velg en enkel form, for eksempel en sirkel. Tegn eller beskriv tre helt ulike ting som kan bygges ut fra formen. Sammenlign hvor mange forskjellige ideer klassen får.",
+    "gear": "Papir og blyant",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 98,
+    "title": "Lag en mini-reklame",
+    "cat": "Kreativitet",
+    "mins": 6,
+    "grade": "5-7",
+    "instructions": "Lag en kort, vennlig reklame for en helt vanlig ting i klasserommet. Finn på et slagord og én grunn til at tingen er nyttig. Fremfør for en partner, ikke som en konkurranse.",
+    "gear": "Ingen",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 99,
+    "title": "Fremtidens friminutt",
+    "cat": "Kreativitet",
+    "mins": 7,
+    "grade": "1-7",
+    "instructions": "Tenk ut en ny aktivitet som kunne gjort friminuttet morsommere eller roligere for flere. Gi den et navn, forklar reglene med tre punkter og si hvilket utstyr som trengs.",
+    "gear": "Papir og blyant",
+    "setup": "Ved pulten"
+  },
+  {
+    "id": 100,
+    "title": "Bilde med kroppen",
+    "cat": "Kreativitet",
+    "mins": 6,
+    "grade": "1-7",
+    "instructions": "Læreren sier et ord, for eksempel «bro», «vind», «stjerne» eller «vennskap». Elevene lager et stille bilde med kroppen eller hendene som viser ordet. Flere tolkninger er velkomne.",
+    "gear": "Ingen",
+    "setup": "Litt plass"
+  }
+];
+const activities = [...baseActivities, ...extraActivities];
 const $=id=>document.getElementById(id);let category='all',favOnly=false,current=null,remaining=0,total=0,running=false,interval=null;
 let favorites=new Set();try{favorites=new Set(JSON.parse(localStorage.getItem('pausepuls-favs')||'[]'))}catch(e){}
 function saveFavs(){try{localStorage.setItem('pausepuls-favs',JSON.stringify([...favorites]))}catch(e){}}
-function filtered(){const g=$('grade').value,d=$('duration').value,k=$('kind').value,q=$('search').value.trim().toLowerCase();return activities.filter(a=>(category==='all'||a.cat===category)&&(k==='all'||a.cat===k)&&(g==='all'||a.grade==='1-7'||a.grade===g)&&(d==='all'||(d==='short'?a.mins<=2:d==='medium'?a.mins>=3&&a.mins<=5:a.mins>=6))&&(!favOnly||favorites.has(a.id))&&(!q||(a.title+' '+a.cat+' '+a.instructions).toLowerCase().includes(q)))}
-function render(){const list=filtered();$('count').textContent=list.length+' aktiviteter';$('listTitle').textContent=favOnly?'Favoritter':'Aktiviteter';$('empty').style.display=list.length?'none':'block';$('cards').innerHTML=list.map(a=>`<button class="card" data-id="${a.id}"><div class="cardtop"><span class="chip">${a.cat}</span><span class="sub">${a.mins} min</span></div><h4>${escapeHtml(a.title)}</h4><div class="sub">${a.grade==='1-4'?'1.–4. trinn':a.grade==='5-7'?'5.–7. trinn':'1.–7. trinn'}</div></button>`).join('');$('cards').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>openActivity(+b.dataset.id))}
+function filtered(){const g=$('grade').value,d=$('duration').value,k=$('kind').value,e=$('equipment').value,setup=$('setup').value,q=$('search').value.trim().toLowerCase();return activities.filter(a=>(category==='all'||a.cat===category)&&(k==='all'||a.cat===k)&&(g==='all'||a.grade==='1-7'||a.grade===g)&&(d==='all'||(d==='short'?a.mins<=2:d==='medium'?a.mins>=3&&a.mins<=5:a.mins>=6))&&(e==='all'||(e==='none'?a.gear==='Ingen':a.gear!=='Ingen'))&&(setup==='all'||a.setup===setup)&&(!favOnly||favorites.has(a.id))&&(!q||(a.title+' '+a.cat+' '+a.instructions+' '+a.gear+' '+a.setup).toLowerCase().includes(q)))}
+function render(){const list=filtered();$('count').textContent=list.length+' aktiviteter';$('listTitle').textContent=favOnly?'Favoritter':'Aktiviteter';$('empty').style.display=list.length?'none':'block';$('cards').innerHTML=list.map(a=>`<button class="card" data-id="${a.id}"><div class="cardtop"><span class="chip">${escapeHtml(a.cat)}</span><span class="sub">${a.mins} min</span></div><h4>${escapeHtml(a.title)}</h4><div class="sub">${a.grade==='1-4'?'1.–4. trinn':a.grade==='5-7'?'5.–7. trinn':'1.–7. trinn'} · ${escapeHtml(a.gear)}</div><div class="sub">${escapeHtml(a.setup)}</div></button>`).join('');$('cards').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>openActivity(+b.dataset.id))}
 function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function stop(){clearInterval(interval);interval=null;running=false;$('start').textContent='▶ Start'}
 function fmt(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}
 function update(){ $('timer').textContent=fmt(remaining);$('barFill').style.width=(total?100*remaining/total:0)+'%';if(remaining<=0){stop();$('done').style.display='block';$('start').textContent='✓ Ferdig'}}
-function openActivity(id){stop();current=activities.find(a=>a.id===id);total=current.mins*60;remaining=total;$('home').style.display='none';$('detail').style.display='block';$('dCat').textContent=current.cat;$('dTitle').textContent=current.title;$('dMeta').textContent=current.mins+' minutter · '+(current.grade==='1-4'?'1.–4. trinn':current.grade==='5-7'?'5.–7. trinn':'1.–7. trinn');$('dInstructions').textContent=current.instructions;$('dStar').textContent=favorites.has(id)?'★':'☆';$('done').style.display='none';update()}
+function openActivity(id){stop();current=activities.find(a=>a.id===id);total=current.mins*60;remaining=total;$('home').style.display='none';$('detail').style.display='block';$('dCat').textContent=current.cat;$('dTitle').textContent=current.title;$('dMeta').textContent=current.mins+' minutter · '+(current.grade==='1-4'?'1.–4. trinn':current.grade==='5-7'?'5.–7. trinn':'1.–7. trinn')+' · '+current.gear+' · '+current.setup;$('dInstructions').textContent=current.instructions;$('dStar').textContent=favorites.has(id)?'★':'☆';$('done').style.display='none';update()}
 function start(){if(running)return;if(remaining<=0){remaining=total;$('done').style.display='none'}running=true;$('start').textContent='Ⅱ Pause';interval=setInterval(()=>{remaining=Math.max(0,remaining-1);update()},1000)}
 $('random').onclick=()=>{const list=filtered();if(!list.length)return alert('Ingen aktiviteter passer filtrene.');openActivity(list[Math.floor(Math.random()*list.length)].id)};
 document.querySelectorAll('.tile').forEach(b=>b.onclick=()=>{category=category===b.dataset.cat?'all':b.dataset.cat;document.querySelectorAll('.tile').forEach(x=>x.classList.toggle('active',x.dataset.cat===category));$('kind').value='all';render()});
-['grade','duration','kind','search'].forEach(id=>$(id).addEventListener(id==='search'?'input':'change',render));
+['grade','duration','kind','equipment','setup','search'].forEach(id=>$(id).addEventListener(id==='search'?'input':'change',render));
 $('favoritesToggle').onclick=()=>{favOnly=!favOnly;$('favoritesToggle').textContent=favOnly?'★ Vis alle':'☆ Favoritter';render()};
 $('dStar').onclick=()=>{if(!current)return;favorites.has(current.id)?favorites.delete(current.id):favorites.add(current.id);saveFavs();$('dStar').textContent=favorites.has(current.id)?'★':'☆';render()};
 $('back').onclick=()=>{stop();$('detail').style.display='none';$('home').style.display='block';render()};

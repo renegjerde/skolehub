@@ -4,7 +4,7 @@ SkoleHub samler tre eksisterende webapper i én felles portal med et felles visu
 
 - **KaffeStatus** – status og siste oppdateringer på pauserommet.
 - **InspeksjonsVakt** – personlig inspeksjonsoversikt, ukeplan, favorittvalg og administrasjon av inspeksjonsplan.
-- **PausePuls** – aktivitetsbank, filtrering, favoritter, tilfeldig aktivitet, timer og lokal aktivitetsgenerator.
+- **PausePuls** – aktivitetsbibliotek med 100 aktiviteter, fem kategorier, filtre for klassetrinn, varighet (1–10 minutter), utstyr og romoppsett, favoritter, tilfeldig aktivitet og nedtelling.
 
 ## Kom i gang lokalt
 
@@ -59,7 +59,7 @@ SkoleHub/
 
 ## Versjon
 
-SkoleHub 1.1.3 · Live timevær for Paradis, Bergen med dag-/nattikon.
+Aktuell versjon: **SkoleHub 1.2.0** · Større PausePuls-bibliotek med 100 aktiviteter.
 
 
 ## Versjon 1.1.1
@@ -118,3 +118,12 @@ Supabase Free koster 0 USD innenfor kvotene, men prosjekter med for lite databas
 ## Versjon 1.1.4
 - Nattikonet for delvis skyet og overskyet vær viser nå månen bak skyen med overlappende lag, i stedet for to emojier ved siden av hverandre.
 - Oppdatert cache-versjon for CSS og JavaScript slik at nettleseren henter de nye ikonstilene.
+
+
+## Versjon 1.2.0 – større PausePuls-bibliotek
+- Utvidet PausePuls fra 30 til 100 ferdig beskrevne aktiviteter for 1.–7. trinn.
+- Lagt til kategorien Kreativitet.
+- Lagt til filtre for utstyr og hvor mye plass aktiviteten krever.
+- Kortene viser nå klassetrinn, utstyrsbehov og romoppsett.
+- Favoritter, tilfeldig aktivitet og nedtelling er beholdt.
+- Aktivitetene er laget for vanlig klasseromsbruk; tilpass alltid bevegelser, tempo og deltakelse til elevgruppen.

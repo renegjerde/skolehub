@@ -6,7 +6,7 @@ const modules = {
     title: 'InspeksjonsVakt', icon: '◷', subtitle: 'Din personlige inspeksjonsoversikt', path: 'apps/inspeksjon/index.html'
   },
   pausepuls: {
-    title: 'PausePuls', icon: '⚡', subtitle: 'Pauseaktiviteter for 1.–7. trinn', path: 'apps/pausepuls/index.html'
+    title: 'PausePuls', icon: '⚡', subtitle: '100 pauseaktiviteter for 1.–7. trinn', path: 'apps/pausepuls/index.html?v=1.2.0'
   }
 };
 

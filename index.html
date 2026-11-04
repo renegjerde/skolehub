@@ -33,7 +33,11 @@
             <h1>En enklere<br><em>skolehverdag.</em></h1>
             <p class="welcome-text">De digitale verktøyene dine – samlet på ett sted.</p>
           </div>
-          <div class="welcome-symbol" aria-hidden="true">☀</div>
+          <button class="welcome-symbol weather-widget" id="weatherWidget" type="button" aria-label="Henter værmelding for Paradis, Bergen" title="Værmelding for Paradis, Bergen">
+            <span class="weather-icon" id="weatherIcon" aria-hidden="true">☀</span>
+            <strong class="weather-temp" id="weatherTemp">…°</strong>
+            <small class="weather-label" id="weatherLabel">Paradis</small>
+          </button>
         </div>
 
         <div class="section-heading">
@@ -74,7 +78,7 @@
       </section>
     </main>
 
-    <footer class="site-footer"><span>SkoleHub</span><span>·</span><span>En samlet verktøykasse for ansatte</span><span class="footer-version">v1.0.0</span></footer>
+    <footer class="site-footer"><span>SkoleHub</span><span>·</span><span>En samlet verktøykasse for ansatte</span><span class="weather-credit">Værdata: Open-Meteo</span><span class="footer-version">v1.0.1</span></footer>
   </div>
   <script src="assets/app.js"></script>
 </body>

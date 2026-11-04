@@ -24,6 +24,10 @@ Portalen bruker vanlige HTML-, CSS- og JavaScript-filer. Det er ikke nødvendig 
 
 `apps/inspeksjon/plan.json` inneholder ansattes navn og informasjon om inspeksjonstid og -område. En statisk GitHub Pages-løsning uten innlogging gir ikke tilgangskontroll til denne informasjonen. **Ikke publiser denne versjonen på en offentlig tilgjengelig adresse før skolen har vurdert og godkjent delingen.** Avklar med skoleeier/IT hvilken publiseringsløsning og tilgangsstyring som er godkjent. Å gjøre selve kildekoderepositoryet privat er ikke alene en garanti for at publisert nettside er skjermet.
 
+## Værmelding på startsiden
+
+Værkortet viser timeprognosen for et fast punkt ved Paradis i Bergen. Det henter temperatur, værtype, nedbørssannsynlighet og vind fra Open-Meteo med MET Nordic-værmodell, bruker tidssonen Europe/Oslo og oppdateres automatisk hvert 30. minutt. Trykk på værkortet for detaljer. Værdata er en modellprognose for området, ikke en lokal måling på skolebygget. Tjenesten krever internettilgang. Kilde: [Open-Meteo](https://open-meteo.com/en/docs/metno-api).
+
 ## Data og begrensninger i denne versjonen
 
 - Appene er beholdt som separate moduler og vises inne i SkoleHub. Den felles portalen gir felles navigasjon og et samordnet visuelt uttrykk.
@@ -55,4 +59,4 @@ SkoleHub/
 
 ## Versjon
 
-SkoleHub 1.0.0 · Første sammenslåtte versjon.
+SkoleHub 1.0.1 · Live timevær for Paradis, Bergen.

@@ -176,3 +176,82 @@ window.addEventListener('hashchange', () => {
 const initial = location.hash.slice(1);
 if (modules[initial]) openModule(initial);
 else goHome();
+
+
+// Værmelding for Paradis, Bergen – inneværende time fra Open-Meteo (MET Nordic).
+(function initParadisWeather() {
+  const widget = document.getElementById('weatherWidget');
+  const iconEl = document.getElementById('weatherIcon');
+  const tempEl = document.getElementById('weatherTemp');
+  const labelEl = document.getElementById('weatherLabel');
+  if (!widget || !iconEl || !tempEl || !labelEl) return;
+
+  // Fast punkt ved Paradis i Bergen. Værdata gjelder modellruten nær skolen.
+  const latitude = 60.3373;
+  const longitude = 5.3447;
+  const api = new URL('https://api.open-meteo.com/v1/forecast');
+  api.search = new URLSearchParams({
+    latitude, longitude,
+    hourly: 'temperature_2m,precipitation_probability,weather_code,wind_speed_10m',
+    timezone: 'Europe/Oslo', forecast_days: '2',
+    temperature_unit: 'celsius', wind_speed_unit: 'ms'
+  }).toString();
+
+  const weatherTypes = {
+    0: ['☀️', 'Klart', 'sun'], 1: ['🌤️', 'Lettskyet', 'sun'],
+    2: ['⛅', 'Delvis skyet', 'cloud'], 3: ['☁️', 'Overskyet', 'cloud'],
+    45: ['🌫️', 'Tåke', 'cloud'], 48: ['🌫️', 'Rimtåke', 'cloud'],
+    51: ['🌦️', 'Lett yr', 'rain'], 53: ['🌦️', 'Yr', 'rain'], 55: ['🌧️', 'Kraftig yr', 'rain'],
+    56: ['🌧️', 'Underkjølt yr', 'rain'], 57: ['🌧️', 'Underkjølt yr', 'rain'],
+    61: ['🌧️', 'Lett regn', 'rain'], 63: ['🌧️', 'Regn', 'rain'], 65: ['🌧️', 'Kraftig regn', 'rain'],
+    66: ['🌧️', 'Underkjølt regn', 'rain'], 67: ['🌧️', 'Underkjølt regn', 'rain'],
+    71: ['🌨️', 'Lett snø', 'snow'], 73: ['❄️', 'Snø', 'snow'], 75: ['❄️', 'Kraftig snø', 'snow'],
+    77: ['🌨️', 'Snøkorn', 'snow'], 80: ['🌦️', 'Regnbyger', 'rain'],
+    81: ['🌧️', 'Regnbyger', 'rain'], 82: ['⛈️', 'Kraftige byger', 'rain'],
+    85: ['🌨️', 'Snøbyger', 'snow'], 86: ['❄️', 'Kraftige snøbyger', 'snow'],
+    95: ['⛈️', 'Tordenvær', 'rain'], 96: ['⛈️', 'Hagl og torden', 'rain'], 99: ['⛈️', 'Kraftig hagl og torden', 'rain']
+  };
+
+  function showUnavailable() {
+    iconEl.textContent = '🌤️'; tempEl.textContent = '–°'; labelEl.textContent = 'Paradis';
+    widget.title = 'Værmeldingen er midlertidig utilgjengelig. Prøv igjen senere.';
+    widget.setAttribute('aria-label', 'Værmelding for Paradis er midlertidig utilgjengelig');
+  }
+
+  async function updateWeather() {
+    try {
+      const response = await fetch(api.toString(), { cache: 'no-store' });
+      if (!response.ok) throw new Error(`Vær-API svarte ${response.status}`);
+      const data = await response.json();
+      const times = data.hourly?.time || [];
+      const now = new Date();
+      const localHour = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Oslo', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hourCycle: 'h23' }).format(now).replace(' ', 'T').slice(0, 13) + ':00';
+      let index = times.indexOf(localHour);
+      if (index < 0) index = times.findIndex(t => t >= localHour);
+      if (index < 0) throw new Error('Fant ingen værprognose for inneværende time');
+
+      const code = data.hourly.weather_code[index];
+      const [symbol, description, tone] = weatherTypes[code] || ['🌤️', 'Værmelding', 'cloud'];
+      const temperature = Math.round(data.hourly.temperature_2m[index]);
+      const rain = data.hourly.precipitation_probability?.[index];
+      const wind = data.hourly.wind_speed_10m?.[index];
+      const timeLabel = times[index].slice(11, 16);
+      const nextTime = times[index + 1]?.slice(11, 16) || '–';
+      iconEl.textContent = symbol; tempEl.textContent = `${temperature}°`; labelEl.textContent = 'Paradis';
+      widget.classList.remove('is-rain', 'is-cloud', 'is-snow');
+      if (tone !== 'sun') widget.classList.add(`is-${tone}`);
+      const details = `${description} · ${temperature} °C${rain == null ? '' : ` · ${Math.round(rain)} % nedbørsjanse`}${wind == null ? '' : ` · Vind ${Math.round(wind)} m/s`}`;
+      widget.title = `Paradis, Bergen · ${timeLabel}–${nextTime}: ${details}. Værdata fra Open-Meteo.`;
+      widget.setAttribute('aria-label', `Værmelding Paradis, Bergen, inneværende time: ${details}`);
+    } catch (error) {
+      console.warn('Kunne ikke hente værmelding for Paradis:', error);
+      showUnavailable();
+    }
+  }
+
+  updateWeather();
+  window.setInterval(updateWeather, 30 * 60 * 1000);
+  widget.addEventListener('click', () => {
+    if (widget.title) alert(widget.title);
+  });
+})();

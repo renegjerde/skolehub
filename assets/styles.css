@@ -21,3 +21,6 @@ button,a{font:inherit;-webkit-tap-highlight-color:transparent}button{cursor:poin
 .weather-credit{font-size:9px;color:#9A8B82}
 @media(max-width:720px){.weather-widget{width:84px;height:84px;flex-basis:84px;border-radius:27px;font-size:inherit}.weather-icon{font-size:29px}.weather-temp{font-size:15px}.weather-label{font-size:8px}}
 @media(max-width:420px){.weather-widget{width:70px;height:70px;flex-basis:70px;border-radius:23px;padding:6px 3px}.weather-icon{font-size:25px}.weather-temp{font-size:13px}.weather-label{font-size:7px}}
+
+/* Nattfarger på værkortet etter lokal solnedgang. */
+.weather-widget.is-night{background:linear-gradient(145deg,#E2E5F2,#F3F1F7);box-shadow:0 12px 28px rgba(91,101,139,.12)}

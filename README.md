@@ -59,7 +59,7 @@ SkoleHub/
 
 ## Versjon
 
-SkoleHub 1.1.1 · Live timevær for Paradis, Bergen.
+SkoleHub 1.1.2 · Live timevær for Paradis, Bergen med dag-/nattikon.
 
 
 ## Versjon 1.1.1
@@ -101,3 +101,9 @@ Supabase Free koster 0 USD innenfor kvotene, men prosjekter med for lite databas
 - Ikke legg Supabase Secret Key eller service_role-nøkkel i GitHub.
 - Kontroller at SQL-oppsettet i `apps/kaffestatus/supabase-schema.sql` er kjørt i det samme Supabase-prosjektet.
 - Etter publisering skal KaffeStatus vise «Tilkoblet felles kaffetavle». Test med to separate enheter.
+
+
+## Versjon 1.1.2
+- Værkortet bruker Open-Meteos `is_day`-felt for å skifte fra sol til måne etter lokal solnedgang.
+- Delvis skyet vær vises som måne og sky om natten.
+- Værkortet får en kjøligere nattfarget bakgrunn etter solnedgang.

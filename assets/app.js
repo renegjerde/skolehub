@@ -192,7 +192,7 @@ else goHome();
   const api = new URL('https://api.open-meteo.com/v1/forecast');
   api.search = new URLSearchParams({
     latitude, longitude,
-    hourly: 'temperature_2m,precipitation_probability,weather_code,wind_speed_10m',
+    hourly: 'temperature_2m,precipitation_probability,weather_code,wind_speed_10m,is_day',
     timezone: 'Europe/Oslo', forecast_days: '2',
     temperature_unit: 'celsius', wind_speed_unit: 'ms'
   }).toString();
@@ -231,15 +231,25 @@ else goHome();
       if (index < 0) throw new Error('Fant ingen værprognose for inneværende time');
 
       const code = data.hourly.weather_code[index];
-      const [symbol, description, tone] = weatherTypes[code] || ['🌤️', 'Værmelding', 'cloud'];
+      const [daySymbol, description, tone] = weatherTypes[code] || ['🌤️', 'Værmelding', 'cloud'];
+      // Open-Meteo is_day følger soloppgang og solnedgang for Paradis.
+      // Bruk et enkelt sol-/måneikon for klart og delvis skyet vær om natten.
+      const isNight = data.hourly.is_day?.[index] != null
+        ? Number(data.hourly.is_day[index]) === 0
+        : false;
+      const nightSymbols = { 0: '🌙', 1: '🌙', 2: '🌙☁️', 3: '☁️' };
+      const symbol = isNight && Object.prototype.hasOwnProperty.call(nightSymbols, code)
+        ? nightSymbols[code]
+        : daySymbol;
       const temperature = Math.round(data.hourly.temperature_2m[index]);
       const rain = data.hourly.precipitation_probability?.[index];
       const wind = data.hourly.wind_speed_10m?.[index];
       const timeLabel = times[index].slice(11, 16);
       const nextTime = times[index + 1]?.slice(11, 16) || '–';
       iconEl.textContent = symbol; tempEl.textContent = `${temperature}°`; labelEl.textContent = 'Paradis';
-      widget.classList.remove('is-rain', 'is-cloud', 'is-snow');
+      widget.classList.remove('is-rain', 'is-cloud', 'is-snow', 'is-night');
       if (tone !== 'sun') widget.classList.add(`is-${tone}`);
+      if (isNight) widget.classList.add('is-night');
       const details = `${description} · ${temperature} °C${rain == null ? '' : ` · ${Math.round(rain)} % nedbørsjanse`}${wind == null ? '' : ` · Vind ${Math.round(wind)} m/s`}`;
       widget.title = `Paradis, Bergen · ${timeLabel}–${nextTime}: ${details}. Værdata fra Open-Meteo.`;
       widget.setAttribute('aria-label', `Værmelding Paradis, Bergen, inneværende time: ${details}`);

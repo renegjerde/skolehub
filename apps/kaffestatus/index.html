@@ -245,6 +245,27 @@
       letter-spacing: 0.5px;
     }
 
+    .sync-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin: -2px 0 12px;
+    }
+    .sync-status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D6A94E;
+      flex: 0 0 8px;
+    }
+    .sync-status[data-state="online"]::before { background: #66BB6A; }
+    .sync-status[data-state="offline"]::before { background: #EF5350; }
+    .sync-status[data-state="local"]::before { background: #D6A94E; }
+
     .history-list {
       list-style: none;
       display: flex;
@@ -332,20 +353,20 @@
         </button>
       </div>
 
-      <div class="note-input-container">
-        <input type="text" id="noteInput" class="note-input" placeholder="Valgfri notis (f.eks. Kanne 1 er full)...">
-      </div>
     </div>
 
     <!-- History Card -->
     <div class="card">
       <div class="history-title">Siste oppdateringer</div>
+      <div class="sync-status" id="syncStatus" role="status" aria-live="polite">Starter KaffeStatus …</div>
       <ul class="history-list" id="historyList">
         <li class="history-item"><span>Ingen historikk ennå</span></li>
       </ul>
     </div>
   </div>
 
+  <script src="./supabase-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     // Audio Synthesizer (Web Audio API)
     const AudioEngine = {
@@ -410,52 +431,167 @@
       NO: 'Kannene er tomme! 🫗'
     };
 
+    const LOCAL_CACHE_KEY = 'kaffestatus_data';
+    const SUPABASE_CONFIG = window.SKOLEHUB_SUPABASE_CONFIG || {};
+    let supabaseClient = null;
+    let realtimeChannel = null;
+    let cloudEnabled = false;
+    let isApplyingRemoteState = false;
+
     let state = {
       status: 'YES',
       timestamp: Date.now(),
-      note: '',
       history: []
     };
 
-    function loadState() {
-      const saved = localStorage.getItem('kaffestatus_data');
-      if (saved) {
-        try {
-          state = JSON.parse(saved);
-        } catch(e){}
+    function setSyncStatus(message, status = 'local') {
+      const el = document.getElementById('syncStatus');
+      if (!el) return;
+      el.textContent = message;
+      el.dataset.state = status;
+    }
+
+    function saveLocalCache() {
+      try {
+        // Only status codes and timestamps are cached. No names, IDs or free text.
+        localStorage.setItem(LOCAL_CACHE_KEY, JSON.stringify(state));
+      } catch (error) {
+        console.warn('Kunne ikke oppdatere lokal hurtigbuffer:', error);
+      }
+    }
+
+    function loadLocalCache() {
+      try {
+        const saved = localStorage.getItem(LOCAL_CACHE_KEY);
+        if (!saved) return;
+        const parsed = JSON.parse(saved);
+        if (parsed && ['FRESH', 'YES', 'NO'].includes(parsed.status)) {
+          state = {
+            status: parsed.status,
+            timestamp: Number(parsed.timestamp) || Date.now(),
+            history: Array.isArray(parsed.history)
+              ? parsed.history.slice(0, 8).filter(item => ['FRESH', 'YES', 'NO'].includes(item.status))
+              : []
+          };
+        }
+      } catch (error) {
+        console.warn('Kunne ikke lese lokal hurtigbuffer:', error);
       }
       render();
     }
 
-    function saveState() {
-      localStorage.setItem('kaffestatus_data', JSON.stringify(state));
+    function mapCloudState(current, historyRows) {
+      const updatedAt = Date.parse(current.updated_at);
+      state = {
+        status: current.status,
+        timestamp: Number.isFinite(updatedAt) ? updatedAt : Date.now(),
+        history: (historyRows || []).slice(0, 8).map(row => ({
+          status: row.status,
+          timestamp: Date.parse(row.created_at) || Date.now()
+        }))
+      };
+      saveLocalCache();
+      render();
+    }
+
+    async function loadCloudState() {
+      const [currentResult, historyResult] = await Promise.all([
+        supabaseClient.from('coffee_status').select('id,status,updated_at').eq('id', 1).single(),
+        supabaseClient.from('coffee_status_history').select('status,created_at').order('created_at', { ascending: false }).limit(8)
+      ]);
+      if (currentResult.error) throw currentResult.error;
+      if (historyResult.error) throw historyResult.error;
+      mapCloudState(currentResult.data, historyResult.data);
+    }
+
+    async function connectSharedDatabase() {
+      const url = (SUPABASE_CONFIG.url || '').trim();
+      const key = (SUPABASE_CONFIG.publishableKey || '').trim();
+      if (!url || !key || !window.supabase?.createClient) {
+        loadLocalCache();
+        setSyncStatus('Lokal testmodus – ikke koblet til felles database', 'local');
+        return;
+      }
+
+      try {
+        supabaseClient = window.supabase.createClient(url, key, {
+          auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+        });
+        await loadCloudState();
+        cloudEnabled = true;
+        setSyncStatus('Tilkoblet felles kaffetavle', 'online');
+
+        realtimeChannel = supabaseClient
+          .channel('kaffestatus-live')
+          .on('postgres_changes', {
+            event: 'UPDATE', schema: 'public', table: 'coffee_status', filter: 'id=eq.1'
+          }, async () => {
+            if (isApplyingRemoteState) return;
+            try {
+              await loadCloudState();
+              setSyncStatus('Tilkoblet felles kaffetavle', 'online');
+            } catch (error) {
+              console.error('Kunne ikke hente ny felles status:', error);
+              setSyncStatus('Tilkoblet, men kunne ikke hente siste status', 'offline');
+            }
+          })
+          .subscribe((status) => {
+            if (status === 'SUBSCRIBED') setSyncStatus('Tilkoblet felles kaffetavle', 'online');
+            if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT' || status === 'CLOSED') {
+              setSyncStatus('Mistet sanntidsforbindelsen – prøver igjen', 'offline');
+            }
+          });
+      } catch (error) {
+        console.error('KaffeStatus kunne ikke koble til Supabase:', error);
+        cloudEnabled = false;
+        loadLocalCache();
+        setSyncStatus('Kun lokal visning – felles database er utilgjengelig', 'offline');
+      }
     }
 
     function setStatus(type) {
-      const noteVal = document.getElementById('noteInput').value.trim();
+      if (!['FRESH', 'YES', 'NO'].includes(type)) return;
+      const now = Date.now();
+
+      // Optimistic UI: show the new status immediately, before network operations.
       state.status = type;
-      state.timestamp = Date.now();
-      state.note = noteVal;
-
-      state.history.unshift({
-        status: type,
-        timestamp: Date.now(),
-        note: noteVal
-      });
-      if (state.history.length > 8) state.history.pop();
-
-      document.getElementById('noteInput').value = '';
-
-      // Haptics
-      if (navigator.vibrate) navigator.vibrate(50);
-
-      // Audio
-      if (type === 'FRESH') AudioEngine.playFresh();
-      else if (type === 'YES') AudioEngine.playYes();
-      else AudioEngine.playNo();
-
-      saveState();
+      state.timestamp = now;
+      state.history.unshift({ status: type, timestamp: now });
+      state.history = state.history.slice(0, 8);
       render();
+      saveLocalCache();
+
+      // Sound/haptics are intentionally independent of the database operation.
+      try {
+        if (navigator.vibrate) navigator.vibrate(50);
+        if (type === 'FRESH') AudioEngine.playFresh();
+        else if (type === 'YES') AudioEngine.playYes();
+        else AudioEngine.playNo();
+      } catch (error) {
+        console.warn('Lyd eller haptikk kunne ikke spilles av:', error);
+      }
+
+      if (!cloudEnabled || !supabaseClient) {
+        setSyncStatus('Bare lagret på denne enheten – ikke delt', 'local');
+        return;
+      }
+
+      setSyncStatus('Oppdaterer felles kaffetavle …', 'local');
+      supabaseClient.rpc('set_coffee_status', { p_status: type })
+        .then(async ({ error }) => {
+          if (error) throw error;
+          isApplyingRemoteState = true;
+          try {
+            await loadCloudState();
+          } finally {
+            isApplyingRemoteState = false;
+          }
+          setSyncStatus('Oppdatert for alle – felles kaffetavle', 'online');
+        })
+        .catch(error => {
+          console.error('Kunne ikke lagre status i felles database:', error);
+          setSyncStatus('Ikke synkronisert – siste status er bare lokal', 'offline');
+        });
     }
 
     function getRelativeTime(time) {
@@ -469,19 +605,16 @@
 
     function render() {
       document.getElementById('statusIcon').innerHTML = ICONS[state.status];
-      let label = LABELS[state.status];
-      if (state.note) label += ` ("${state.note}")`;
-      document.getElementById('statusBadge').innerText = label;
+      document.getElementById('statusBadge').innerText = LABELS[state.status];
       document.getElementById('statusTime').innerText = getRelativeTime(state.timestamp);
 
-      // Render History
       const historyEl = document.getElementById('historyList');
-      if (state.history.length === 0) {
+      if (!state.history.length) {
         historyEl.innerHTML = '<li class="history-item"><span>Ingen historikk ennå</span></li>';
       } else {
         historyEl.innerHTML = state.history.map(item => `
           <li class="history-item">
-            <span class="history-text">${LABELS[item.status]} ${item.note ? '<i>(' + item.note + ')</i>' : ''}</span>
+            <span class="history-text">${LABELS[item.status]}</span>
             <span class="history-time">${getRelativeTime(item.timestamp)}</span>
           </li>
         `).join('');
@@ -491,8 +624,23 @@
     // Auto-update time text every 30s
     setInterval(() => render(), 30000);
 
-    // Initial Load
-    loadState();
+    // Synkroniser eldre/lokale faner som fortsatt bruker samme nettleserlagring.
+    window.addEventListener('storage', (event) => {
+      if (event.key !== LOCAL_CACHE_KEY || !event.newValue || cloudEnabled) return;
+      try {
+        const parsed = JSON.parse(event.newValue);
+        if (parsed && ['FRESH', 'YES', 'NO'].includes(parsed.status)) {
+          state = { status: parsed.status, timestamp: Number(parsed.timestamp) || Date.now(), history: parsed.history || [] };
+          render();
+        }
+      } catch (error) {
+        console.warn('Kunne ikke lese lokal statusoppdatering:', error);
+      }
+    });
+
+    // Initial load: shared database when configured, otherwise local preview mode.
+    loadLocalCache();
+    connectSharedDatabase();
   </script>
 </body>
 </html>

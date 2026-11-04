@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FAF7F2">
+  <meta name="description" content="SkoleHub – en samlet verktøykasse for ansatte i skolen.">
+  <title>SkoleHub – verktøy for skolehverdagen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="#hjem" aria-label="SkoleHub – hjem">
+        <span class="brand-icon" aria-hidden="true">✳</span>
+        <span class="brand-copy"><strong>SkoleHub</strong><small>Verktøy for skolehverdagen</small></span>
+      </a>
+      <div class="header-right">
+        <span class="header-note"><span class="online-dot"></span> Samlet arbeidsrom</span>
+      </div>
+    </header>
+
+    <main>
+      <section id="homeView" class="home-view">
+        <div class="welcome">
+          <div class="welcome-copy">
+            <p class="eyebrow">VELKOMMEN</p>
+            <h1>En enklere<br><em>skolehverdag.</em></h1>
+            <p class="welcome-text">De digitale verktøyene dine – samlet på ett sted.</p>
+          </div>
+          <div class="welcome-symbol" aria-hidden="true">☀</div>
+        </div>
+
+        <div class="section-heading">
+          <div><p class="eyebrow">VERKTØYKASSEN</p><h2>Hva trenger du i dag?</h2></div>
+          <span class="tool-count">3 verktøy</span>
+        </div>
+
+        <div class="tool-grid">
+          <button class="tool-card coffee-card" data-module="kaffestatus">
+            <span class="tool-icon" aria-hidden="true">☕</span>
+            <span class="tool-content"><strong>KaffeStatus</strong><span>Se og oppdater kaffestatusen på pauserommet.</span><small>Åpne verktøy <b>↗</b></small></span>
+          </button>
+          <button class="tool-card inspection-card" data-module="inspeksjon">
+            <span class="tool-icon" aria-hidden="true">◷</span>
+            <span class="tool-content"><strong>InspeksjonsVakt</strong><span>Finn din neste inspeksjon og se ukeplanen.</span><small>Åpne verktøy <b>↗</b></small></span>
+          </button>
+          <button class="tool-card pause-card" data-module="pausepuls">
+            <span class="tool-icon" aria-hidden="true">⚡</span>
+            <span class="tool-content"><strong>PausePuls</strong><span>Finn raske pauseaktiviteter for 1.–7. trinn.</span><small>Åpne verktøy <b>↗</b></small></span>
+          </button>
+        </div>
+
+        <section class="quick-note card">
+          <div class="note-icon" aria-hidden="true">✦</div>
+          <div><strong>Alt på ett sted</strong><p>Åpne et verktøy fra oversikten. Du kan alltid gå tilbake hit via «Alle verktøy» øverst.</p></div>
+        </section>
+      </section>
+
+      <section id="moduleView" class="module-view" hidden>
+        <div class="module-toolbar">
+          <button id="backHome" class="back-button" type="button"><span aria-hidden="true">←</span> Alle verktøy</button>
+          <div class="module-heading"><span id="moduleIcon" class="module-heading-icon">☕</span><div><p class="eyebrow">SKOLEHUB · VERKTØY</p><h1 id="moduleTitle">KaffeStatus</h1></div></div>
+          <span id="moduleSubtitle" class="module-subtitle">Pauserommet på arbeidsplassen</span>
+        </div>
+        <div class="module-surface">
+          <iframe id="moduleFrame" title="SkoleHub-verktøy" loading="lazy"></iframe>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><span>SkoleHub</span><span>·</span><span>En samlet verktøykasse for ansatte</span><span class="footer-version">v1.0.0</span></footer>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>

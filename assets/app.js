@@ -192,7 +192,8 @@ else goHome();
   const api = new URL('https://api.open-meteo.com/v1/forecast');
   api.search = new URLSearchParams({
     latitude, longitude,
-    hourly: 'temperature_2m,precipitation_probability,weather_code,wind_speed_10m,is_day',
+    hourly: 'temperature_2m,precipitation_probability,weather_code,wind_speed_10m',
+    daily: 'sunrise,sunset',
     timezone: 'Europe/Oslo', forecast_days: '2',
     temperature_unit: 'celsius', wind_speed_unit: 'ms'
   }).toString();
@@ -232,12 +233,25 @@ else goHome();
 
       const code = data.hourly.weather_code[index];
       const [daySymbol, description, tone] = weatherTypes[code] || ['🌤️', 'Værmelding', 'cloud'];
-      // Open-Meteo is_day følger soloppgang og solnedgang for Paradis.
-      // Bruk et enkelt sol-/måneikon for klart og delvis skyet vær om natten.
-      const isNight = data.hourly.is_day?.[index] != null
-        ? Number(data.hourly.is_day[index]) === 0
-        : false;
-      const nightSymbols = { 0: '🌙', 1: '🌙', 2: '🌙☁️', 3: '☁️' };
+      // Bruk soloppgang og solnedgang for Paradis i Europe/Oslo.
+      // Dette er mer robust enn å stole på is_day fra én timeverdi i API-et.
+      const forecastHour = times[index]; // lokal tid fordi API-et er bedt om Europe/Oslo
+      const forecastDate = forecastHour.slice(0, 10);
+      const dailyIndex = data.daily?.time?.indexOf(forecastDate) ?? -1;
+      const sunrise = dailyIndex >= 0 ? data.daily.sunrise?.[dailyIndex] : null;
+      const sunset = dailyIndex >= 0 ? data.daily.sunset?.[dailyIndex] : null;
+      let isNight;
+      if (sunrise && sunset) {
+        // ISO-lokalstrenger kan sammenlignes direkte siden alle har samme tidssoneformat.
+        isNight = forecastHour < sunrise || forecastHour >= sunset;
+      } else {
+        // Reserve dersom soltidene mangler: bruk lokal klokke i Bergen.
+        const hourInBergen = Number(new Intl.DateTimeFormat('en-GB', {
+          timeZone: 'Europe/Oslo', hour: '2-digit', hourCycle: 'h23'
+        }).format(now));
+        isNight = hourInBergen < 7 || hourInBergen >= 19;
+      }
+      const nightSymbols = { 0: '🌙', 1: '🌙☁️', 2: '🌙☁️', 3: '🌙☁️' };
       const symbol = isNight && Object.prototype.hasOwnProperty.call(nightSymbols, code)
         ? nightSymbols[code]
         : daySymbol;
